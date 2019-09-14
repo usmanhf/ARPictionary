@@ -8,20 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		BC3C73AD232461B100D482B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C73AC232461B100D482B0 /* AppDelegate.swift */; };
-		BC3C73AF232461B100D482B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C73AE232461B100D482B0 /* ViewController.swift */; };
-		BC3C73B2232461B100D482B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC3C73B0232461B100D482B0 /* Main.storyboard */; };
 		BC3C73B4232461B300D482B0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC3C73B3232461B300D482B0 /* Assets.xcassets */; };
 		BC3C73B7232461B300D482B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC3C73B5232461B300D482B0 /* LaunchScreen.storyboard */; };
+		BC3C73BF2324635900D482B0 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC3C73BE2324635900D482B0 /* GameViewController.swift */; };
+		BCBBF461232CC41600AECE55 /* stroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBBF460232CC41600AECE55 /* stroke.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BC3C73A9232461B000D482B0 /* ARLearning.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARLearning.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC3C73AC232461B100D482B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BC3C73AE232461B100D482B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		BC3C73B1232461B100D482B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BC3C73B3232461B300D482B0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC3C73B6232461B300D482B0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BC3C73B8232461B300D482B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC3C73BE2324635900D482B0 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		BCBBF460232CC41600AECE55 /* stroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stroke.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +55,11 @@
 			isa = PBXGroup;
 			children = (
 				BC3C73AC232461B100D482B0 /* AppDelegate.swift */,
-				BC3C73AE232461B100D482B0 /* ViewController.swift */,
-				BC3C73B0232461B100D482B0 /* Main.storyboard */,
 				BC3C73B3232461B300D482B0 /* Assets.xcassets */,
 				BC3C73B5232461B300D482B0 /* LaunchScreen.storyboard */,
 				BC3C73B8232461B300D482B0 /* Info.plist */,
+				BC3C73BE2324635900D482B0 /* GameViewController.swift */,
+				BCBBF460232CC41600AECE55 /* stroke.swift */,
 			);
 			path = ARLearning;
 			sourceTree = "<group>";
@@ -124,7 +124,6 @@
 			files = (
 				BC3C73B7232461B300D482B0 /* LaunchScreen.storyboard in Resources */,
 				BC3C73B4232461B300D482B0 /* Assets.xcassets in Resources */,
-				BC3C73B2232461B100D482B0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +134,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC3C73AF232461B100D482B0 /* ViewController.swift in Sources */,
+				BC3C73BF2324635900D482B0 /* GameViewController.swift in Sources */,
+				BCBBF461232CC41600AECE55 /* stroke.swift in Sources */,
 				BC3C73AD232461B100D482B0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,14 +143,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		BC3C73B0232461B100D482B0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BC3C73B1232461B100D482B0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BC3C73B5232461B300D482B0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -289,7 +281,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.us-man.ARLearning";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.us-man.ARPictionary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -307,7 +299,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.us-man.ARLearning";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.us-man.ARPictionary";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
