@@ -11,7 +11,7 @@ import ARKit
 
 class GameViewController: UIViewController, ARSCNViewDelegate{
     
-    var stack = [SCNNode]()
+    var stack = [Stroke]()
     
     let arView:ARSCNView = {
         let view = ARSCNView()
@@ -22,7 +22,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate{
     let configuration = ARWorldTrackingConfiguration()
     
     
-    var startingPositionNode = SCNNode()
+    
     var endPositionNode = SCNNode()
     let cameraRelativePosition = SCNVector3(0,0,-0.1)
     
@@ -64,7 +64,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate{
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         let longGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(handlePress))
-        longGestureRecognizer.minimumPressDuration = 0;
+        longGestureRecognizer.minimumPressDuration = 0.2;
         arView.addGestureRecognizer(tapGestureRecognizer)
         arView.addGestureRecognizer(longGestureRecognizer)
     }
@@ -165,7 +165,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate{
     
     @objc func buttonUndo(){
         print("UNDO")
-        removeBox()
+        removeLastStroke()
     }
     
     @objc func buttonReset(){
@@ -176,10 +176,10 @@ class GameViewController: UIViewController, ARSCNViewDelegate{
    
     
     
-    func removeBox(){
+    func removeLastStroke(){
         if(stack.count>0){
-            let lastBox = stack.popLast()
-            lastBox?.removeFromParentNode()
+            let lastStroke = stack.popLast()
+            lastStroke?.removeStroke()
         }
     }
     
@@ -226,57 +226,25 @@ class GameViewController: UIViewController, ARSCNViewDelegate{
     }
     
     @objc func handleTap(sender: UITapGestureRecognizer){
-//        let tappedView = sender.view as! SCNView
-//        let touchLocation = sender.location(in: tappedView)
-//        let hitTest = tappedView.hitTest(touchLocation, options: nil)
-//        if (!hitTest.isEmpty){
-//            let result = hitTest.first!
-//            let name = result.node.name
-//            let geometry = result.node.geometry
-//            print("\(name) \(geometry)")
-//        }
-        let sphere = SCNNode(geometry: SCNSphere(radius: 0.002))
-        sphere.geometry?.firstMaterial?.diffuse.contents = UIColor.white
-        addChildNode(node: sphere, toNode: arView.scene.rootNode, inView: arView, cameraRelativePostion: cameraRelativePosition)
-        startingPositionNode = sphere
+        let newStroke = Stroke()
+        newStroke.addToStroke(arView: arView,cameraRelativePosition: cameraRelativePosition)
+        stack.append(newStroke)
+        print("tap")
     }
     
     @objc func handlePress(sender: UILongPressGestureRecognizer){
         if(sender.state.rawValue == 1){
+            let newStroke = Stroke()
+            stack.append(newStroke)
             print("began")
         }
         else if(sender.state.rawValue == 3){
+            stack.last?.endStroke()
             print("end")
         }
-        let sphere = SCNNode(geometry: SCNSphere(radius: 0.002))
-        sphere.geometry?.firstMaterial?.diffuse.contents = UIColor.white
-        addChildNode(node: sphere, toNode: arView.scene.rootNode, inView: arView, cameraRelativePostion: cameraRelativePosition)
-        startingPositionNode = sphere
+        stack.last?.addToStroke(arView: arView, cameraRelativePosition: cameraRelativePosition)
     }
     
-    func addChildNode(node: SCNNode, toNode: SCNNode, inView: ARSCNView, cameraRelativePostion:SCNVector3) {
-        
-        guard let currentFrame = inView.session.currentFrame else {return}
-        let camera = currentFrame.camera
-        let transform = camera.transform
-        var translationMatrix = matrix_identity_float4x4
-        translationMatrix.columns.3.x = cameraRelativePostion.x
-        translationMatrix.columns.3.y = cameraRelativePostion.y
-        translationMatrix.columns.3.z = cameraRelativePostion.z
-        let modifiedMatrix = simd_mul(transform,translationMatrix)
-        node.simdTransform = modifiedMatrix
-        toNode.addChildNode(node)
-        stack.append(node)
-    }
-    
-//    func renderer(_ renderer: SCNSceneRenderer, willRenderScene scene: SCNScene, atTime time: TimeInterval) {
-//        if(plusButton.isHighlighted){
-//            let sphere = SCNNode(geometry: SCNSphere(radius: 0.002))
-//            sphere.geometry?.firstMaterial?.diffuse.contents = UIColor.red
-//            addChildNode(node: sphere, toNode: arView.scene.rootNode, inView: arView, cameraRelativePostion: cameraRelativePosition)
-//            startingPositionNode = sphere
-//        }
-//    }
     
     
 }
